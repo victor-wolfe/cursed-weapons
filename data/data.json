@@ -3,42 +3,42 @@
         "id": 0,
         "productName": "Kitchen Knife",
         "price": 6,
-        "curse": "",
+        "curseLevel": "",
         "description": ""
     },
     {
         "id": 1,
         "productName": "Dagger",
         "price": 10,
-        "curse": "",
+        "curseLevel": "",
         "description": ""
     },
     {
         "id": 2,
         "productName": "Sparkling Sword",
         "price": 50,
-        "curse": "",
+        "curseLevel": "",
         "description": ""
     },
     {
         "id": 3,
         "productName": "King of Hearts Sword",
         "price": 75,
-        "curse": "",
+        "curseLevel": "",
         "description": ""
     },
     {
         "id": 4,
         "productName": "Sword",
         "price": 45,
-        "curse": "",
+        "curseLevel": "",
         "description": ""
     },
     {
         "id": 5,
         "productName": "Machete",
         "price": 30,
-        "curse": "",
+        "curseLevel": "",
         "description": ""
     }
 ]
