@@ -3,42 +3,42 @@
         "id": 0,
         "productName": "Kitchen Knife",
         "price": 6,
-        "curseLevel": "",
-        "description": ""
+        "curseLevel": "LOW",
+        "description": "It's less that it's cursed and more that it's just kind of dull."
     },
     {
         "id": 1,
         "productName": "Dagger",
         "price": 10,
-        "curseLevel": "",
-        "description": ""
+        "curseLevel": "MED",
+        "description": "Lowers your charisma. Recommended only for min-maxers with low self-esteem."
     },
     {
         "id": 2,
         "productName": "Sparkling Sword",
         "price": 50,
-        "curseLevel": "",
-        "description": ""
+        "curseLevel": "MED",
+        "description": "This sword loves to sing. Hope you like show tunes."
     },
     {
         "id": 3,
         "productName": "King of Hearts Sword",
         "price": 75,
-        "curseLevel": "",
-        "description": ""
+        "curseLevel": "HIGH",
+        "description": "Anyone stabbed by this sword will fall in love with you. They will probably still die though."
     },
     {
         "id": 4,
         "productName": "Sword",
         "price": 45,
-        "curseLevel": "",
-        "description": ""
+        "curseLevel": "HIGH",
+        "description": "Every previous owner of this sword perished in battle. Good birthday gift for somebody you hate?"
     },
     {
         "id": 5,
         "productName": "Machete",
         "price": 30,
-        "curseLevel": "",
-        "description": ""
+        "curseLevel": "LOW",
+        "description": "For better or worse, you WILL grow a mullet."
     }
 ]
