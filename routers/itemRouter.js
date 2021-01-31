@@ -1,18 +1,15 @@
 const express = require("express")
 const {
   addItem,
-  checkID,
   deleteItem,
-  getInventory,
+  getAllItems,
   getItem,
   updateItem,
-} = require("../controllers/inventoryController")
+} = require("../controllers/itemController")
 
 const router = express.Router()
 
-router.param("id", checkID)
-
-router.route("/").get(getInventory).post(addItem)
+router.route("/").get(getAllItems).post(addItem)
 router.route("/:id").get(getItem).patch(updateItem).delete(deleteItem)
 
 module.exports = router

@@ -1,44 +1,58 @@
 [
     {
-        "id": 0,
+        "image": "0.png",
         "productName": "Kitchen Knife",
         "price": 6,
         "curseLevel": "LOW",
         "description": "It's less that it's cursed and more that it's just kind of dull."
     },
     {
-        "id": 1,
+        "image": "1.png",
         "productName": "Dagger",
         "price": 10,
         "curseLevel": "MED",
         "description": "Lowers your charisma. Recommended only for min-maxers with low self-esteem."
     },
     {
-        "id": 2,
+        "image": "2.png",
         "productName": "Sparkling Sword",
         "price": 50,
         "curseLevel": "MED",
         "description": "This sword loves to sing. Hope you like show tunes."
     },
     {
-        "id": 3,
+        "image": "3.png",
         "productName": "King of Hearts Sword",
         "price": 75,
         "curseLevel": "HIGH",
         "description": "Anyone stabbed by this sword will fall in love with you. They will probably still die though."
     },
     {
-        "id": 4,
+        "image": "4.png",
         "productName": "Sword",
         "price": 45,
         "curseLevel": "HIGH",
         "description": "Every previous owner of this sword perished in battle. Good birthday gift for somebody you hate?"
     },
     {
-        "id": 5,
+        "image": "5.png",
         "productName": "Machete",
         "price": 30,
         "curseLevel": "LOW",
         "description": "For better or worse, you WILL grow a mullet."
+    },
+    {
+        "image": "1.png",
+        "productName": "Nice Guy Dagger",
+        "price": 10,
+        "curseLevel": "HIGH",
+        "description": "Causes a deeply warped world view in the mind of its wielder. Comes with matching fedora."
+    },
+    {
+        "image": "0.png",
+        "productName": "Haunted Kitchen Knife",
+        "price": 16,
+        "curseLevel": "MED",
+        "description": "A famous chef lived and died by this... literally."
     }
 ]

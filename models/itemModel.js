@@ -28,6 +28,10 @@ const itemSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  image: {
+    type: String,
+    default: "0",
+  },
 })
 
 const Item = mongoose.model("Item", itemSchema)
