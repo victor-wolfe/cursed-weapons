@@ -29,3 +29,7 @@ const itemSchema = new mongoose.Schema({
     default: Date.now(),
   },
 })
+
+const Item = mongoose.model("Item", itemSchema)
+
+module.exports = Item
