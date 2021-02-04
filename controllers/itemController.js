@@ -88,3 +88,29 @@ exports.deleteItem = async (req, res) => {
     })
   }
 }
+
+// Aggregate Stats
+exports.getItemStats = async (req, res) => {
+  try {
+    const stats = await Item.aggregate([
+      {
+        $group: {
+          _id: { type: "$type" },
+          numItems: { $sum: 1 },
+        },
+      },
+    ])
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        stats,
+      },
+    })
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: err,
+    })
+  }
+}
