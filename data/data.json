@@ -1,55 +1,55 @@
 [
     {
-        "image": "0.png",
+        "type": "knife",
         "productName": "Kitchen Knife",
         "price": 6,
         "curseLevel": "LOW",
         "description": "It's less that it's cursed and more that it's just kind of dull."
     },
     {
-        "image": "1.png",
-        "productName": "Dagger",
+        "type": "dagger",
+        "productName": "Uncool Dagger",
         "price": 10,
         "curseLevel": "MED",
-        "description": "Lowers your charisma. Recommended only for min-maxers with low self-esteem."
+        "description": "Raises your attack but lowers your charisma. Recommended only for min-maxers with low self-esteem."
     },
     {
-        "image": "2.png",
+        "type": "magicsword",
         "productName": "Sparkling Sword",
         "price": 50,
         "curseLevel": "MED",
         "description": "This sword loves to sing. Hope you like show tunes."
     },
     {
-        "image": "3.png",
+        "type": "sword",
         "productName": "King of Hearts Sword",
         "price": 75,
         "curseLevel": "HIGH",
         "description": "Anyone stabbed by this sword will fall in love with you. They will probably still die though."
     },
     {
-        "image": "4.png",
+        "type": "broadsword", 
         "productName": "Sword",
         "price": 45,
         "curseLevel": "HIGH",
         "description": "Every previous owner of this sword perished in battle. Good birthday gift for somebody you hate?"
     },
     {
-        "image": "5.png",
-        "productName": "Machete",
+        "type": "machete",
+        "productName": "Manchete",
         "price": 30,
         "curseLevel": "LOW",
         "description": "For better or worse, you WILL grow a mullet."
     },
     {
-        "image": "1.png",
+        "type": "dagger",
         "productName": "Nice Guy Dagger",
         "price": 10,
         "curseLevel": "HIGH",
         "description": "Causes a deeply warped world view in the mind of its wielder. Comes with matching fedora."
     },
     {
-        "image": "0.png",
+        "type": "knife",
         "productName": "Haunted Kitchen Knife",
         "price": 16,
         "curseLevel": "MED",

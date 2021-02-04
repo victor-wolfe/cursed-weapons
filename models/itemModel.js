@@ -28,9 +28,9 @@ const itemSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  image: {
+  type: {
     type: String,
-    default: "0",
+    default: "sword",
   },
 })
 
