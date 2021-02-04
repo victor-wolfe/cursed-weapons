@@ -1,11 +1,17 @@
-const fs = require("fs")
 const Item = require("../models/itemModel")
+const APIFeatures = require("../utils/APIFeatures")
 
 // const slugs = storeStock.map((el) => slugify(el.productName, { lower: true }))
 
 exports.getAllItems = async (req, res) => {
   try {
-    const items = await Item.find()
+    const features = new APIFeatures(Item.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate()
+
+    const items = await features.query
     res.status(200).json({
       status: "Success",
       results: items.length,
@@ -14,6 +20,7 @@ exports.getAllItems = async (req, res) => {
       },
     })
   } catch (err) {
+    console.log(err)
     res.status(400).json({
       status: "fail",
       message: err,
