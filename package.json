@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
@@ -17,7 +18,8 @@
     "mongoose": "^5.11.14",
     "path": "^0.12.7",
     "slugify": "^1.4.6",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

@@ -1,5 +1,5 @@
 const express = require("express")
-
+const authController = require("./../controllers/authController")
 const {
   getallUsers,
   createUser,
@@ -10,6 +10,8 @@ const {
 
 // Routes
 const router = express.Router()
+
+router.post("/signup", authController.signup)
 
 router.route("/").get(getallUsers).post(createUser)
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser)
