@@ -12,8 +12,9 @@ const {
 const router = express.Router()
 
 router.post("/signup", authController.signup)
+router.post("/login", authController.login)
 
-router.route("/").get(getallUsers).post(createUser)
+router.route("/").get(authController.protect, getallUsers).post(createUser)
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser)
 
 module.exports = router
