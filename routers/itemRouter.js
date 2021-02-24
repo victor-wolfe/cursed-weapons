@@ -13,6 +13,10 @@ const router = express.Router()
 router.route("/stats").get(getItemStats)
 
 router.route("/").get(getAllItems).post(addItem)
-router.route("/:id").get(getItem).patch(updateItem).delete(deleteItem)
+router
+  .route("/:id")
+  .get(getItem)
+  .patch(authController.restrictTo("admin"), updateItem)
+  .delete(authController.restrictTo("admin"), deleteItem)
 
 module.exports = router

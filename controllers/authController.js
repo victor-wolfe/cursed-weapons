@@ -87,3 +87,57 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser
   next()
 })
+
+// Restricts to provided roles
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError("You do not have permission to perform this action."),
+        403
+      )
+    }
+    return next()
+  }
+}
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  // 1) Get user based on email
+  const user = await User.findOne({ email: req.body.email })
+  if (!user) return next(new AppError("Email not found", 404))
+
+  // 2) Generate token
+  const resetToken = user.createPasswordResetToken()
+  await user.save({ validateBeforeSave: false })
+
+  // 3) send back as email
+  const resetURL = `${req.protocol}://${req.get(
+    "host"
+  )}/api/v1/users/resetPassword/${resetToken}}`
+
+  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to ${resetURL}\nIf you didn't forget your password, ignore this email.`
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Your password token is valid for 10 minutes.",
+      message,
+    })
+
+    res.status(200).json({
+      status: "success",
+      message: "Token sent to email",
+    })
+  } catch (err) {
+    // Ensures that password reset token is removed if there is an error sending the email
+    user.passwordResetToken = undefined
+    user.passwordResetExpires = undefined
+    await user.save({ validateBeforeSave: false })
+
+    return next(new AppError("There was an error sending the email", 500))
+  }
+})
+
+exports.resetPassword = (res, req, next) => {
+  next()
+}

@@ -12,6 +12,10 @@
 
 Before using this API, you'll want to create a `config.env` file for yourself. `example.env` has been provided as a template.
 
+## Getting started with the database
+
+Run `/data/import-dev-data.js` to quickly populate the database from JSON. It requires one of two arguments: `--import` or `--delete`
+
 ## Features
 
 This API provides a CRUD interface for a store's inventory.
