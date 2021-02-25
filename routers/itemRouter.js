@@ -7,6 +7,7 @@ const {
   getItemStats,
   updateItem,
 } = require("../controllers/itemController")
+const authController = require("./../controllers/authController")
 
 const router = express.Router()
 
