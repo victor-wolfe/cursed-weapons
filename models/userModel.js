@@ -52,12 +52,21 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
 })
 
+// Check & encrypt password
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next()
 
   this.password = await bcrypt.hash(this.password, 12)
 
   this.passwordConfirm = undefined
+  next()
+})
+
+// If password has been changed, set time it was changed
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next()
+  // set 1 second in the past to ensure token is created after password changed
+  this.passwordChangedAt = Date.now() - 1000
   next()
 })
 
