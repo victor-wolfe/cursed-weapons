@@ -4,11 +4,25 @@ const jwt = require("jsonwebtoken")
 const User = require("../models/userModel")
 const catchAsync = require("../utils/catchAsync")
 const AppError = require("./../utils/appError")
+const sendEmail = require("./../utils/email")
 
 // Produces JWT token based on user ID
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
+  })
+}
+
+// Create and send a token
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id)
+
+  return res.status(statusCode).json({
+    status: "success",
+    token,
+    data: {
+      user,
+    },
   })
 }
 
@@ -21,15 +35,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
   })
 
-  const token = signToken(newUser._id)
-
-  res.status(201).json({
-    status: "success",
-    token,
-    data: {
-      user: newUser,
-    },
-  })
+  createSendToken(newUser, 201, res)
 })
 
 // Login existing user
@@ -48,11 +54,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3) Send token to client
-  const token = signToken(user._id)
-  return res.status(200).json({
-    status: "success",
-    token,
-  })
+  createSendToken(user, 200, res)
 })
 
 // Protects routes from being accessed if the user is not logged in
@@ -168,4 +170,23 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     status: "success",
     token,
   })
+})
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // 1) Get user from collection
+  //User.findByIdAndUpdate will not work; it will skip the middleware
+  const user = await User.findById(req.user.id).select("+password")
+
+  // 2) Check if posted password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError("Current password is incorrect", 401))
+  }
+
+  // 3) If password is correct, update pssword
+  user.password = req.body.password
+  user.passwordConfirm = req.body.passwordConfirm
+  await user.save()
+
+  // 4) Log user in with JWT
+  createSendToken(user, 200, res)
 })
