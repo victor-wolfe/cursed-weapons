@@ -18,11 +18,23 @@ Run `/data/import-dev-data.js` to quickly populate the database from JSON. It re
 
 ## Features
 
-This API provides a CRUD interface for a store's inventory.
+### API Features
 
-- Get, post, and patch data
-- Filtering and statistics
-- User login and authentification, utilizing JWS
+This API provides user and admin operations for a storefront.
+
+- View the store inventory using sort and filters
+- View store statistics
+- Users can change a password, edit a profile, or deactivate their account
+
+### Security
+
+- Encrypted passwords (salted and hashed using bcrypt)
+- Password reset with encrypted tokens
+- Secure cookies
+- Rate limiting to prevent DOS attacks
+- Sanitizes user input data and parameters
+- Data modeled with MongoDB
+- Hides error details in production
 
 ## Links
 

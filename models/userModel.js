@@ -78,7 +78,7 @@ userSchema.pre("save", function (next) {
 //filter out inactive users
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } })
-  next
+  next()
 })
 
 // Compare encrypted passwords to validate
