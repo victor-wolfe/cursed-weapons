@@ -7,6 +7,7 @@ const {
   updateUser,
   deleteUser,
   updateProfile,
+  deactivateUser,
 } = require("./../controllers/userController")
 
 // Routes
@@ -22,6 +23,7 @@ router.patch(
   authController.updatePassword
 )
 router.patch("/updateProfile", authController.protect, updateProfile)
+router.delete("/deleteAccount", authController.protect, deactivateUser)
 
 router
   .route("/")

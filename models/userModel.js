@@ -50,6 +50,11 @@ const userSchema = new mongoose.Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
 })
 
 // Check & encrypt password
@@ -68,6 +73,12 @@ userSchema.pre("save", function (next) {
   // set 1 second in the past to ensure token is created after password changed
   this.passwordChangedAt = Date.now() - 1000
   next()
+})
+
+//filter out inactive users
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: { $ne: false } })
+  next
 })
 
 // Compare encrypted passwords to validate
