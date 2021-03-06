@@ -2,6 +2,7 @@ const crypto = require("crypto")
 const mongoose = require("mongoose")
 const validator = require("validator")
 const bcrypt = require("bcryptjs")
+const Item = require("./itemModel")
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -36,6 +37,12 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide a password"],
     minlength: [8, "Password must be at least 8 characters."],
   },
+  favorites: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: Item,
+    },
+  ],
   passwordConfirm: {
     type: String,
     required: [true, "Please confirm your password"],
@@ -72,6 +79,15 @@ userSchema.pre("save", function (next) {
   if (!this.isModified("password") || this.isNew) return next()
   // set 1 second in the past to ensure token is created after password changed
   this.passwordChangedAt = Date.now() - 1000
+  next()
+})
+
+// populate a user's favorites
+tourSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "favorites",
+    // select: "-__v",
+  })
   next()
 })
 
