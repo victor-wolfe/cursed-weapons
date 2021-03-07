@@ -11,6 +11,7 @@ const globalErrorHandler = require("./controllers/errorHandler")
 
 const itemRouter = require("./routers/itemRouter")
 const userRouter = require("./routers/userRouter")
+const reviewRouter = require("./routers/reviewRouter")
 
 const app = express()
 
@@ -55,6 +56,7 @@ app.use(express.static("./images"))
 
 app.use("/api/v1/inventory", itemRouter)
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/users", reviewRouter)
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl}`, 404))
