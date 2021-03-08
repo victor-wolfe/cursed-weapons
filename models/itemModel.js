@@ -9,8 +9,8 @@ const itemSchema = new mongoose.Schema(
       unique: true,
       trim: true,
       maxlength: [
-        40,
-        "Whoa there, Shakespeare! Shorten that a little, will ya?",
+        30,
+        "Whoa there! I'm definitely not going to remember a name that long!",
       ],
       minlength: [
         3,
@@ -72,6 +72,13 @@ const itemSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 )
+
+// Virtual populate
+itemSchema.virtual("reviews", {
+  ref: "Review",
+  foreignField: "item",
+  localField: "_id",
+})
 
 // Document middleware
 itemSchema.pre("save", function (next) {
