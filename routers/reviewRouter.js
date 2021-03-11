@@ -8,7 +8,7 @@ const {
 
 const authController = require("./../controllers/authController")
 
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 
 router.route("/").get(getReviews).post(authController.protect, postReview)
 router.route("/:id").patch(updateReview).delete(deleteReview)

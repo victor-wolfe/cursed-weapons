@@ -3,6 +3,7 @@ const APIFeatures = require("../utils/APIFeatures")
 const catchAsync = require("../utils/catchAsync")
 const AppError = require("../utils/appError")
 
+// Get the entire inventory
 exports.getAllItems = catchAsync(async (req, res) => {
   const features = new APIFeatures(Item.find(), req.query)
     .filter()
@@ -20,8 +21,12 @@ exports.getAllItems = catchAsync(async (req, res) => {
   })
 })
 
+// Get an individual item by ID
 exports.getItem = catchAsync(async (req, res) => {
   const item = await Item.findById(req.params.id).populate("reviews")
+  if (!item) {
+    return next(new AppError("Item not found", 404))
+  }
   res.status(200).json({
     status: "Success",
     data: {
@@ -30,6 +35,7 @@ exports.getItem = catchAsync(async (req, res) => {
   })
 })
 
+// Add an item
 exports.addItem = catchAsync(async (req, res) => {
   const newItem = await Item.create(req.body)
   res.status(200).json({
@@ -40,6 +46,7 @@ exports.addItem = catchAsync(async (req, res) => {
   })
 })
 
+// Update an item
 exports.updateItem = catchAsync(async (req, res) => {
   const item = await Item.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
@@ -52,8 +59,10 @@ exports.updateItem = catchAsync(async (req, res) => {
   })
 })
 
+// Delete an item
 exports.deleteItem = catchAsync(async (req, res) => {
-  await Item.findByIdAndDelete(req.params.id)
+  const item = await Item.findByIdAndDelete(req.params.id)
+  if (!item) return next(new AppError("Item not found", 404))
   res.status(204).json({
     status: "success",
     data: null,

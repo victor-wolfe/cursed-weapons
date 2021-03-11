@@ -3,19 +3,16 @@ const catchAsync = require("../utils/catchAsync")
 const Review = require("./../models/reviewModel")
 
 exports.getReviews = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Tour.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate()
-  const reviews = await features.query
+  let filter = {}
+  if (req.params.itemId) filter = { item: req.params.itemId }
+  const reviews = await Review.find(filter)
 
   //SEND RESPONSE
   res.status(200).json({
     status: "success",
     results: reviews.length,
     data: {
-      reviews: reviews,
+      reviews,
     },
   })
 })

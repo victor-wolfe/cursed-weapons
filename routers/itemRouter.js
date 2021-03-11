@@ -8,6 +8,7 @@ const {
   updateItem,
 } = require("../controllers/itemController")
 const authController = require("./../controllers/authController")
+const reviewRouter = require("./reviewRouter")
 
 const router = express.Router()
 
@@ -19,5 +20,7 @@ router
   .get(getItem)
   .patch(authController.restrictTo("admin"), updateItem)
   .delete(authController.restrictTo("admin"), deleteItem)
+
+router.use("/:itemId/reviews", reviewRouter)
 
 module.exports = router
