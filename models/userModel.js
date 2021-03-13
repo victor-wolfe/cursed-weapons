@@ -83,7 +83,7 @@ userSchema.pre("save", function (next) {
 })
 
 // populate a user's favorites
-tourSchema.pre(/^find/, function (next) {
+userSchema.pre(/^find/, function (next) {
   this.populate({
     path: "favorites",
     // select: "-__v",

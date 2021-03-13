@@ -36,10 +36,6 @@ const itemSchema = new mongoose.Schema(
       required: [true, "Description required"],
       trim: true,
     },
-    reviews: {
-      type: [String],
-      trim: true,
-    },
     createdAt: {
       type: Date,
       default: Date.now(),
