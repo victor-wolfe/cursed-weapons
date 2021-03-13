@@ -1,7 +1,8 @@
 const Item = require("../models/itemModel")
 const APIFeatures = require("../utils/APIFeatures")
-const catchAsync = require("../utils/catchAsync")
 const AppError = require("../utils/appError")
+
+const catchAsync = require("../utils/catchAsync")
 
 // Get the entire inventory
 exports.getAllItems = catchAsync(async (req, res) => {
@@ -60,14 +61,8 @@ exports.updateItem = catchAsync(async (req, res) => {
 })
 
 // Delete an item
-exports.deleteItem = catchAsync(async (req, res) => {
-  const item = await Item.findByIdAndDelete(req.params.id)
-  if (!item) return next(new AppError("Item not found", 404))
-  res.status(204).json({
-    status: "success",
-    data: null,
-  })
-})
+
+exports.deleteItem = factory.deleteOne(Item)
 
 // Aggregate Stats
 exports.getItemStats = catchAsync(async (req, res) => {
