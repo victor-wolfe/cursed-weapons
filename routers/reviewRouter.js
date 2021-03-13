@@ -1,6 +1,7 @@
 const express = require("express")
 const {
-  getReviews,
+  getReview,
+  getAllReviews,
   postReview,
   updateReview,
   deleteReview,
@@ -13,8 +14,8 @@ const router = express.Router({ mergeParams: true })
 
 router
   .route("/")
-  .get(getReviews)
+  .get(getAllReviews)
   .post(authController.protect, setItemUserIds, postReview)
-router.route("/:id").patch(updateReview).delete(deleteReview)
+router.route("/:id").get(getReview).patch(updateReview).delete(deleteReview)
 
 module.exports = router

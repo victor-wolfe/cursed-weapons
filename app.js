@@ -56,7 +56,7 @@ app.use(express.static("./images"))
 
 app.use("/api/v1/inventory", itemRouter)
 app.use("/api/v1/users", userRouter)
-app.use("/api/v1/users", reviewRouter)
+app.use("/api/v1/reviews", reviewRouter)
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl}`, 404))

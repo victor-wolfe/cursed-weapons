@@ -1,41 +1,13 @@
 const Item = require("../models/itemModel")
-const APIFeatures = require("../utils/APIFeatures")
-const AppError = require("../utils/appError")
 
 const catchAsync = require("../utils/catchAsync")
 const factory = require("./factoryFunctions")
 
 // Get the entire inventory
-exports.getAllItems = catchAsync(async (req, res) => {
-  const features = new APIFeatures(Item.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate()
+exports.getAllItems = factory.getAll(Item)
 
-  const items = await features.query
-  res.status(200).json({
-    status: "Success",
-    results: items.length,
-    data: {
-      inventory: items,
-    },
-  })
-})
-
-// Get an individual item by ID
-exports.getItem = catchAsync(async (req, res) => {
-  const item = await Item.findById(req.params.id).populate("reviews")
-  if (!item) {
-    return next(new AppError("Item not found", 404))
-  }
-  res.status(200).json({
-    status: "Success",
-    data: {
-      inventory: item,
-    },
-  })
-})
+// second arg is a field to populate
+exports.getItem = factory.getOne(Item, { path: "reviews" })
 
 // create, update, and delete
 exports.addItem = factory.createOne(Item)
