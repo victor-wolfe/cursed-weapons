@@ -58,11 +58,12 @@ exports.deactivateUser = catchAsync(async (req, res, next) => {
   })
 })
 
-exports.getUser = (req, res) =>
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined",
-  })
+exports.getProfile = (req, res, next) => {
+  req.params.id = req.user.id
+  next()
+}
+
+exports.getUser = factory.getOne("User", { path: "reviews" })
 
 //do NOT update passwords with this function
 exports.updateUser = factory.updateOne(User)

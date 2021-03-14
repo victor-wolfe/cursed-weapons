@@ -3,6 +3,7 @@ const authController = require("./../controllers/authController")
 const {
   getallUsers,
   getUser,
+  getProfile,
   updateUser,
   deleteUser,
   updateProfile,
@@ -21,6 +22,7 @@ router.patch(
   authController.protect,
   authController.updatePassword
 )
+router.get("/profile", authController.protect, getProfile, getUser)
 router.patch("/updateProfile", authController.protect, updateProfile)
 router.delete("/deleteAccount", authController.protect, deactivateUser)
 
