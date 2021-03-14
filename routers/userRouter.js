@@ -22,9 +22,16 @@ router.patch(
   authController.protect,
   authController.updatePassword
 )
-router.get("/profile", authController.protect, getProfile, getUser)
-router.patch("/updateProfile", authController.protect, updateProfile)
-router.delete("/deleteAccount", authController.protect, deactivateUser)
+
+// Must be logged in for all routes after this point
+router.user(authController.protect)
+
+router.get("/profile", getProfile, getUser)
+router.patch("/updateProfile", updateProfile)
+router.delete("/deleteAccount", deactivateUser)
+
+// Only admins can view users
+router.use(authController.restrictTo("admin"))
 
 router.route("/").get(authController.restrictTo("admin"), getallUsers)
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser)
