@@ -24,7 +24,7 @@ router.patch(
 )
 
 // Must be logged in for all routes after this point
-router.user(authController.protect)
+router.use(authController.protect)
 
 router.get("/profile", getProfile, getUser)
 router.patch("/updateProfile", updateProfile)

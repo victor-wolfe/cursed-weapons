@@ -18,6 +18,20 @@ const itemSchema = new mongoose.Schema(
       ],
     },
     slug: String,
+    rating: {
+      type: Number,
+      default: 5,
+    },
+    ratingsAverage: {
+      type: Number,
+      default: 5,
+      min: [1, "Rating must be >=  1.0"],
+      max: [5, "Must be 5.0 or below"],
+    },
+    ratingsQuantity: {
+      type: Number,
+      default: 0,
+    },
     price: {
       type: Number,
       required: [true, "Price required"],
