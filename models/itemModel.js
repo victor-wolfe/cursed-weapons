@@ -69,6 +69,9 @@ const itemSchema = new mongoose.Schema(
   }
 )
 
+// Create DB index for the name slugs
+itemSchema.index({ slug: 1 })
+
 // Virtual populate
 itemSchema.virtual("reviews", {
   ref: "Review",
