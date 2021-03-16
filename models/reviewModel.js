@@ -60,16 +60,34 @@ reviewSchema.statics.calcAverageRatings = async function (itemId) {
     },
   ])
 
-  await Item.findByIdAndUpdate(itemId, {
-    ratingsQuantity: stats[0].nRating,
-    ratingsAverage: stats[0].avgRating,
-  })
+  if (stats.length > 0) {
+    await Item.findByIdAndUpdate(itemId, {
+      ratingsQuantity: stats[0].nRating,
+      ratingsAverage: stats[0].avgRating,
+    })
+  } else {
+    await Item.findByIdAndUpdate(itemId, {
+      ratingsQuantity: 0,
+      ratingsAverage: 5,
+    })
+  }
 }
 
 // Updates ratings average & quantity when a review is posted
 reviewSchema.post("save", function () {
   // "constructor" is in place of Review because this has to be declared before Review
   this.constructor.calcAverageRatings(this.tour)
+})
+
+// Update ratings average & quantity when updating/deleting a review
+reviewSchema.pre(/^findOneAnd/, async function (next) {
+  this.r = await this.findOne()
+  next()
+})
+
+reviewSchema.post(/^findOneAnd/, async function () {
+  // await this.findOne() does NOT work here. Query has already executed.
+  await this.r.constructor.calcAverageRatings(this.r.item)
 })
 
 const Review = mongoose.model("Review", reviewSchema)
