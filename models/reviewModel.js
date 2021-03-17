@@ -39,6 +39,8 @@ const reviewSchema = new mongoose.Schema(
   }
 )
 
+reviewSchema.index({ item: 1, user: 1 }, { unique: true })
+
 reviewSchema.pre(/^find/, function (next) {
   this.populate({
     path: "user",
@@ -50,10 +52,10 @@ reviewSchema.pre(/^find/, function (next) {
 // Calculate review average
 reviewSchema.statics.calcAverageRatings = async function (itemId) {
   const stats = await this.aggregate([
-    { $match: { tour: itemId } },
+    { $match: { item: itemId } },
     {
       $group: {
-        _id: "$tour",
+        _id: "$item",
         nRating: { $sum: 1 },
         avgRating: { $avg: "$rating" },
       },
@@ -76,7 +78,7 @@ reviewSchema.statics.calcAverageRatings = async function (itemId) {
 // Updates ratings average & quantity when a review is posted
 reviewSchema.post("save", function () {
   // "constructor" is in place of Review because this has to be declared before Review
-  this.constructor.calcAverageRatings(this.tour)
+  this.constructor.calcAverageRatings(this.item)
 })
 
 // Update ratings average & quantity when updating/deleting a review
