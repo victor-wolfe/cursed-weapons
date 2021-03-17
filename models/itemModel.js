@@ -27,6 +27,7 @@ const itemSchema = new mongoose.Schema(
       default: 5,
       min: [1, "Rating must be >=  1.0"],
       max: [5, "Must be 5.0 or below"],
+      set: (val) => Math.round(val * 10) / 10,
     },
     ratingsQuantity: {
       type: Number,
