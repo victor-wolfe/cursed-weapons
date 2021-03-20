@@ -1,1 +1,17 @@
-h1 Testing Pug
+doctype html
+html
+    head
+        title Cursed Swords - #{item}
+        <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+        //- link(rel='shortcut icon' type='image/png' href='img/favicon.png')
+
+    body
+        div
+            h1= item
+            h2= user.toUpperCase()
+
+            - const x = 9
+            h2= x * 2
+
+            p This is a paragraph

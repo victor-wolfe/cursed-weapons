@@ -60,7 +60,10 @@ app.use(
 
 // Routes
 app.get("/", (req, res) => {
-  res.status(200).render("test")
+  res.status(200).render("test", {
+    item: "Swordy McSwordface",
+    user: "Swordsman McGee",
+  })
 })
 
 app.use("/api/v1/inventory", itemRouter)
