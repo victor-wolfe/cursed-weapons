@@ -1,0 +1,12 @@
+extends base
+
+block content
+    each item in items
+        .nes-container.is-dark.with-title
+            p.title= item.productName
+                .nes-container.is-dark
+                    img(src=`./images/${item.type}.png`)
+                .nes-container.is-dark
+                    p= `Curse Level: ${item.curseLevel}`
+                    p= `Price: ${item.price} G`
+                    p= item.description

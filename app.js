@@ -13,6 +13,7 @@ const globalErrorHandler = require("./controllers/errorHandler")
 const itemRouter = require("./routers/itemRouter")
 const userRouter = require("./routers/userRouter")
 const reviewRouter = require("./routers/reviewRouter")
+const viewRouter = require("./routers/viewRouter")
 
 const app = express()
 
@@ -59,19 +60,7 @@ app.use(
 )
 
 // Routes
-app.get("/", (req, res) => {
-  res.status(200).render("base", {
-    item: "Swordy McSwordface",
-    user: "Swordsman McGee",
-  })
-})
-
-app.get("/about", (req, res) => {
-  res.status(200).render("about", {
-    title: "About Page",
-  })
-})
-
+app.use("/", viewRouter)
 app.use("/api/v1/inventory", itemRouter)
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/reviews", reviewRouter)
