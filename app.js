@@ -1,3 +1,4 @@
+const path = require("path")
 const express = require("express")
 const morgan = require("morgan")
 const rateLimit = require("express-rate-limit")
@@ -15,7 +16,13 @@ const reviewRouter = require("./routers/reviewRouter")
 
 const app = express()
 
+app.set("view engine", "pug")
+app.set("views", path.join(__dirname, "views"))
+
 // Global Middleware
+// Serves static files
+app.use(express.static(path.join(__dirname, "public")))
+
 // Set security HTTP headers
 app.use(helmet())
 
@@ -51,9 +58,7 @@ app.use(
   })
 )
 
-// Serves static files
-app.use(express.static("./images"))
-
+// Routes
 app.use("/api/v1/inventory", itemRouter)
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/reviews", reviewRouter)

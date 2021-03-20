@@ -39,6 +39,7 @@ const reviewSchema = new mongoose.Schema(
   }
 )
 
+// Ensures one user cannot write multiple reviews for the same item
 reviewSchema.index({ item: 1, user: 1 }, { unique: true })
 
 reviewSchema.pre(/^find/, function (next) {
