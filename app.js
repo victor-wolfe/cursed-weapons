@@ -60,9 +60,15 @@ app.use(
 
 // Routes
 app.get("/", (req, res) => {
-  res.status(200).render("test", {
+  res.status(200).render("base", {
     item: "Swordy McSwordface",
     user: "Swordsman McGee",
+  })
+})
+
+app.get("/about", (req, res) => {
+  res.status(200).render("about", {
+    title: "About Page",
   })
 })
 
